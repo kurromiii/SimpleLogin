@@ -17,8 +17,8 @@ public class UserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        String name = request.getParameter("name");
        String family = request.getParameter("family");
-       String userName = request.getParameter("username");
-       String passWord = request.getParameter("password");
+       String userName = request.getParameter("userName");
+       String passWord = request.getParameter("passWord");
        try {
            if (name != null && family != null && userName != null && passWord != null){
                User user = User.builder().name(name)
@@ -30,6 +30,7 @@ public class UserServlet extends HttpServlet {
            }
        } catch (Exception e) {
            System.out.printf("%s [User Save ERROR] %s", LocalDateTime.now(), userName);
+           System.out.println(e.getMessage());
        }
        response.sendRedirect("");
     }
