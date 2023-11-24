@@ -1,0 +1,20 @@
+body{
+    background-color: blueviolet;
+}
+h1{
+    color: black;
+}
+p{
+    text-align: center;
+}
+input{
+    color: blue;
+    background-color: black;
+}
+hr{
+    background-color: black;
+}
+button{
+    background-color: #452aa5;
+}
+
