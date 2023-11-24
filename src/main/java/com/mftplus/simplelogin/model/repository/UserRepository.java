@@ -6,18 +6,17 @@ import com.mftplus.simplelogin.model.utils.JdbcProvider;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class UserRepository implements AutoCloseable{
     private final Connection connection;
     private PreparedStatement preparedStatement;
 
-    public UserRepository() throws SQLException {
+    public UserRepository() throws Exception {
         connection = JdbcProvider.getJdbcProvider().getConnection();
     }
 
     //register
-    public User save(User user) throws SQLException {
+    public User save(User user) throws Exception {
         preparedStatement = connection.prepareStatement("select users_seq.nextval as id from dual");
         ResultSet resultSet = preparedStatement.executeQuery();
         resultSet.next();
@@ -36,7 +35,7 @@ public class UserRepository implements AutoCloseable{
     }
 
     //unique username
-    public User findByUserName(String username) throws SQLException {
+    public User findByUserName(String username) throws Exception {
         preparedStatement = connection.prepareStatement("select * from users where username=? ");
         preparedStatement.setString(1, username);
 
@@ -54,7 +53,7 @@ public class UserRepository implements AutoCloseable{
     }
 
     //login
-    public User findByUserNameAndPassword(User user) throws SQLException {
+    public User findByUserNameAndPassword(User user) throws Exception {
         preparedStatement = connection.prepareStatement
                 ("select * from users where username=? and password=?");
         preparedStatement.setString(1,user.getUserName());
