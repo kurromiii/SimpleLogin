@@ -5,7 +5,7 @@ h1{
     color: black;
 }
 p{
-    margin: auto;
+    align-content: center;
 }
 input{
     color: blue;

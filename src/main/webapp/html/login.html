@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <title>Login</title>
     <link rel="stylesheet" href="../assets/css/register.css">
 </head>
 <body>
@@ -19,10 +19,10 @@
             <a href="home.html" style="color: black">Home</a>
         </td>
         <td bgcolor="#8a2be2">
-            <a href="#" style="color: black">Register</a>
+            <a href="register.html" style="color: black">Register</a>
         </td>
         <td bgcolor="#8a2be2">
-            <a href="login.html" style="color: black">login</a>
+            <a href="#" style="color: black">login</a>
         </td>
         <td bgcolor="#8a2be2">
             <a href="#" style="color: black">About</a>
@@ -30,24 +30,23 @@
     </tr>
     <tr bgcolor="#4b0082">
         <td colspan="4">
-            <h2 align="center"><i>Please enter your information</i></h2>
-            <form action="/user.do" method="post">
-                <label for="nameId"></label>
-                <p align="center"><input id="nameId" type="text" name="name" placeholder="Name" ></p>
-                <label for="familyId"></label>
-                <p align="center"><input id="familyId" type="text" name="family" placeholder="Family"></p>
+            <br>
+            <h2 align="center">Enter your information to login</h2>
+            <form action="/login.do" method="post">
                 <br/>
                 <label for="userId"></label>
-                <p align="center"><input id="userId" type="text" name="userName" placeholder="UserName"></p>
+                <p align="center"><input id="userId" type="text" name="userName" placeholder="Username"></p>
                 <label for="passId"></label>
-                <p align="center"><input id="passId" type="password" name="passWord" placeholder="passWord"></p>
+                <p align="center"><input id="passId" type="password" name="passWord" placeholder="Password"></p>
                 <br/>
-                <p align="center"><input type="submit" value="save"></p>
+                <p align="center"><input type="submit" value="login"></p>
                 <br/>
-                <h4 align="center"><i>Already a member?</i></h4>
-                <h4 align="center"><a href="login.html" style="color: black"><i>login now</i></a></h4>
+                <h4 align="center"><i>Not a member?</i></h4>
+                <h4 align="center"><i><a href="register.html" style="color: black">Register now</a></i></h4>
+                <br><br><br>
             </form>
         </td>
+
     </tr>
     <tr bgcolor="#9932cc" align="center">
         <td colspan="4">
@@ -61,5 +60,7 @@
         </td>
     </tr>
 </table>
+
+
 </body>
 </html>

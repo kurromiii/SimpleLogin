@@ -27,11 +27,10 @@ public class UserServlet extends HttpServlet {
                        .build();
                UserService.getUserService().save(user);
                System.out.printf("%s [User Save] %s", LocalDateTime.now(), userName);
-           }
-       } catch (Exception e) {
-           System.out.printf("%s [User Save ERROR] %s", LocalDateTime.now(), userName);
-           System.out.println(e.getMessage());
        }
-       response.sendRedirect("");
+    } catch (Exception e) {
+           System.out.printf("%s [User Save ERROR] %s", LocalDateTime.now(), userName);
+       }
+        response.sendRedirect("home.html");
     }
 }
