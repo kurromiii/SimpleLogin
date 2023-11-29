@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
             }
         } catch (Exception e) {
             System.out.printf("%s [LOGIN-ERROR] %s", LocalDateTime.now(),userName);
-            response.sendRedirect("error.html");
+            response.sendRedirect("/html/error.html");
         } catch (AccessDeniedException e) {
             throw new RuntimeException(e);
         }
