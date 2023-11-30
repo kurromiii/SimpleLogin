@@ -6,6 +6,7 @@ import com.mftplus.simplelogin.model.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,8 +25,14 @@ public class LoginServlet extends HttpServlet {
                 user = UserService.getUserService().login(user);
                 if (user==null){
                     response.sendRedirect("/html/error.html");
-                }else {
-                    response.sendRedirect("/");
+                }else
+                    if (request.getParameter("remember") != null &&
+                    request.getParameter("remember").equals("on")){
+                        Cookie uCookie = new Cookie("userName",userName);
+                        Cookie pCookie = new Cookie("passWord",passWord);
+                        response.addCookie(uCookie);
+                        response.addCookie(pCookie);
+                        response.sendRedirect("/");
                     System.out.printf("%s [User logged In] %s", LocalDateTime.now(), userName);
                 }
             }else {
