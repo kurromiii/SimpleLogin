@@ -1,7 +1,9 @@
 package com.mftplus.simplelogin.controller.servlet;
 
+import com.mftplus.simplelogin.controller.exception.DuplicateUsernameException;
 import com.mftplus.simplelogin.model.entity.User;
 import com.mftplus.simplelogin.model.service.UserService;
+import org.apache.jasper.tagplugins.jstl.core.Catch;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,9 +30,14 @@ public class UserServlet extends HttpServlet {
                UserService.getUserService().save(user);
                System.out.printf("%s [User Save] %s", LocalDateTime.now(), userName);
        }
-    } catch (Exception e) {
+           response.sendRedirect("/html/user.jsp");
+    }
+       catch (DuplicateUsernameException e){
+           response.sendRedirect("html/duplicate.html");
+       }
+       catch (Exception e) {
            System.out.printf("%s [User Save ERROR] %s", LocalDateTime.now(), userName);
        }
-        response.sendRedirect("/html/user.jsp");
     }
+
 }

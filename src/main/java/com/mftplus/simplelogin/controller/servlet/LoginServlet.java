@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
                 if (user==null){
                     response.sendRedirect("/html/error.html");
                 }else {
-                    response.sendRedirect("/html/home.html");
+                    response.sendRedirect("/");
                     System.out.printf("%s [User logged In] %s", LocalDateTime.now(), userName);
                 }
             }else {

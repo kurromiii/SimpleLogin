@@ -22,7 +22,7 @@ public class UserService {
             if (userRepository.findByUserName(user.getUserName())== null){
                 return userRepository.save(user);
             }else {
-               throw new DuplicateUsernameException("username is not valid!");
+               throw new DuplicateUsernameException("username is already used!");
             }
         }
     }
