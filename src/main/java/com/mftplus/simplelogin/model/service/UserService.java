@@ -36,5 +36,10 @@ public class UserService {
             return userRepository.findAll();
         }
     }
+    public int remove(int id) throws Exception{
+        try (UserRepository userRepository = new UserRepository()){
+            return userRepository.remove(id);
+        }
+    }
 
 }

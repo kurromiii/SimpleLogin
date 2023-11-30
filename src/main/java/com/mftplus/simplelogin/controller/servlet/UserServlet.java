@@ -30,7 +30,7 @@ public class UserServlet extends HttpServlet {
                UserService.getUserService().save(user);
                System.out.printf("%s [User Save] %s", LocalDateTime.now(), userName);
        }
-           response.sendRedirect("/html/user.jsp");
+           response.sendRedirect("/html/admin.jsp");
     }
        catch (DuplicateUsernameException e){
            response.sendRedirect("html/duplicate.html");

@@ -25,7 +25,7 @@
             <a href="#" style="color: black">login</a>
         </td>
         <td bgcolor="#8a2be2">
-            <a href="#" style="color: black">About</a>
+            <a href="/html/admin.jsp" style="color: black">Admin</a>
         </td>
     </tr>
     <tr bgcolor="#4b0082">
