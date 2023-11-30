@@ -31,6 +31,6 @@ public class UserServlet extends HttpServlet {
     } catch (Exception e) {
            System.out.printf("%s [User Save ERROR] %s", LocalDateTime.now(), userName);
        }
-        response.sendRedirect("");
+        response.sendRedirect("/html/user.jsp");
     }
 }

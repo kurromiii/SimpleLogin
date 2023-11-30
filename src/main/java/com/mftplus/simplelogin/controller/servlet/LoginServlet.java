@@ -21,9 +21,13 @@ public class LoginServlet extends HttpServlet {
         try {
             if (userName != null && passWord != null){
                 User user = User.builder().userName(userName).passWord(passWord).build();
-                UserService.getUserService().login(user);
-                response.sendRedirect("home.html");
-                System.out.printf("%s [User logged In] %s", LocalDateTime.now(), userName);
+                user = UserService.getUserService().login(user);
+                if (user==null){
+                    response.sendRedirect("/html/error.html");
+                }else {
+                    response.sendRedirect("/html/home.html");
+                    System.out.printf("%s [User logged In] %s", LocalDateTime.now(), userName);
+                }
             }else {
                 throw new AccessDeniedException("Invalid username/password");
             }

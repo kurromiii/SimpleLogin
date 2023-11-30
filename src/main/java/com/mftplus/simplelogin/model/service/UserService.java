@@ -4,6 +4,8 @@ import com.mftplus.simplelogin.controller.exception.DuplicateUsernameException;
 import com.mftplus.simplelogin.model.entity.User;
 import com.mftplus.simplelogin.model.repository.UserRepository;
 
+import java.util.List;
+
 
 public class UserService {
     private static final UserService userService = new UserService();
@@ -27,6 +29,11 @@ public class UserService {
     public User login(User user) throws Exception {
         try(UserRepository userRepository = new UserRepository()) {
             return userRepository.findByUserNameAndPassword(user);
+        }
+    }
+    public List<User> findAll() throws Exception {
+        try(UserRepository userRepository = new UserRepository()){
+            return userRepository.findAll();
         }
     }
 
