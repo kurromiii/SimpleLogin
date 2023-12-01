@@ -1,6 +1,5 @@
 package com.mftplus.simplelogin.controller.servlet;
 
-import com.mftplus.simplelogin.controller.exception.AccessDeniedException;
 import com.mftplus.simplelogin.model.entity.User;
 import com.mftplus.simplelogin.model.service.UserService;
 
@@ -11,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.file.AccessDeniedException;
 import java.time.LocalDateTime;
 
 @WebServlet(urlPatterns = "/login.do")
@@ -19,30 +19,26 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String userName = request.getParameter("userName");
         String passWord = request.getParameter("passWord");
+        boolean remember = (request.getParameter("remember") != null) ? true : false;
+
+        if (remember) {
+            Cookie uCookie = new Cookie("userName", userName);
+            Cookie pCookie = new Cookie("passWord", passWord);
+            response.addCookie(uCookie);
+            response.addCookie(pCookie);
+        }
+
         try {
-            if (userName != null && passWord != null){
-                User user = User.builder().userName(userName).passWord(passWord).build();
-                user = UserService.getUserService().login(user);
-                if (user==null){
-                    response.sendRedirect("/html/error.html");
-                }else
-                    if (request.getParameter("remember") != null &&
-                    request.getParameter("remember").equals("on")){
-                        Cookie uCookie = new Cookie("userName",userName);
-                        Cookie pCookie = new Cookie("passWord",passWord);
-                        response.addCookie(uCookie);
-                        response.addCookie(pCookie);
-                        response.sendRedirect("/");
-                    System.out.printf("%s [User logged In] %s", LocalDateTime.now(), userName);
-                }
-            }else {
-                throw new AccessDeniedException("Invalid username/password");
+            User user = User.builder().userName(userName).passWord(passWord).build();
+            if (UserService.getUserService().login(user) != null) {
+                request.getSession().setAttribute("username", user.getUserName());
+                request.getRequestDispatcher("/html/home.html").forward(request,response);
+            }else{
+                throw  new AccessDeniedException("Cant Login");
             }
         } catch (Exception e) {
-            System.out.printf("%s [LOGIN-ERROR] %s", LocalDateTime.now(),userName);
-            response.sendRedirect("/html/error.html");
-        } catch (AccessDeniedException e) {
-            throw new RuntimeException(e);
+            request.getRequestDispatcher("/html/error.html").forward(request,response);
         }
+
     }
 }
